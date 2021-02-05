@@ -1,24 +1,3 @@
 # drap-demo
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+利用vue-grid-layout实现从外部列表拖拽echart图表到内容区并任意拖拽，移动位值
