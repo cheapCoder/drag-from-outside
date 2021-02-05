@@ -1,23 +1,33 @@
 <template>
 	<div class="page">
-		<!-- 主页面 -->
-		<!-- <div> -->
+		<!-- <div>
+			<div class="layoutJSON">
+				Displayed as <code>[x, y, w, h]</code>:
+				<div class="columns">
+					<div class="layoutItem" v-for="item in layout" :key="item.i">
+						<b>{{ item.i }}</b
+						>: [{{ item.x }}, {{ item.y }}, {{ item.w }}, {{ item.h }}]
+					</div>
+				</div>
+			</div>
+		</div>
+		<br /> -->
+
 		<grid-layout
-			class="droppable-content"
 			ref="gridlayout"
+			class="drappable-content"
 			:layout.sync="layout"
 			:col-num="12"
 			:row-height="30"
 			:is-draggable="true"
 			:is-resizable="true"
-			:vertical-compact="false"
-			:use-css-transforms="false"
+			:vertical-compact="true"
+			:use-css-transforms="true"
 		>
-			<a-icon type="setting" class="setting" />
 			<grid-item
 				style="touch-action: none"
-				:key="item.i"
-				v-for="item in layout"
+				:key="index"
+				v-for="(item, index) in layout"
 				:x="item.x"
 				:y="item.y"
 				:w="item.w"
@@ -27,40 +37,30 @@
 				<span class="text">{{ item.i }}</span>
 			</grid-item>
 		</grid-layout>
-		<!-- </div> -->
-		<!-- 右侧拖拽源 -->
-		<!-- <div> -->
-		<a-tabs default-active-key="1" class="droppable-list">
-			<a-tab-pane key="1" tab="2 X 2" class="chart-tab">
-				<!-- <div
-					@drag="drag"
-					@dragend="dragend"
-					draggable="true"
-					unselectable="on"
-				></div> -->
-				<v-chart
-					class="chart"
-					v-for="(chart, index) in allCharts.tab1"
-					:key="index"
-					:ref="'chartA' + index"
-					:options="chart"
-					@drag.native="drag"
-					@dragend="dragend($event, chart)"
-					draggable="true"
-					unselectable="on"
-				/>
-			</a-tab-pane>
-		</a-tabs>
-		<!-- </div> -->
+		<div>
+			<a-tabs default-active-key="1" class="droppable-list">
+				<a-tab-pane tab="2 X 2">
+					<v-chart
+						class="chart"
+						v-for="(chart, index) in allCharts.tab1"
+						:key="index"
+						:ref="'chartA' + index"
+						:options="chart"
+						@drag.native="drag"
+						@dragend.native="dragend($event, chart)"
+						draggable="true"
+						unselectable="on"
+					/>
+				</a-tab-pane>
+			</a-tabs>
+		</div>
 	</div>
 </template>
 
 <script>
 	/* eslint-disable */
 	import { GridLayout, GridItem } from "vue-grid-layout";
-	// import * as echarts from "echarts";
-	// import "echarts/lib/chart/line";
-	// import "echarts/lib/component/polar";
+	import echarts from "echarts";
 
 	import allCharts from "./echarts.js";
 
@@ -73,35 +73,191 @@
 		},
 		data() {
 			return {
-				layout: [
-					// { x: 0, y: 0, w: 2, h: 2, i: "0" },
-					// { x: 2, y: 0, w: 2, h: 4, i: "1" },
-					// { x: 4, y: 0, w: 2, h: 5, i: "2" },
-					// { x: 6, y: 0, w: 2, h: 3, i: "3" },
-					// { x: 8, y: 0, w: 2, h: 3, i: "4" },
-					// { x: 10, y: 0, w: 2, h: 3, i: "5" },
-					// { x: 0, y: 5, w: 2, h: 5, i: "6" },
-					// { x: 2, y: 5, w: 2, h: 5, i: "7" },
-					// { x: 4, y: 5, w: 2, h: 5, i: "8" },
-					// { x: 5, y: 10, w: 4, h: 3, i: "9" },
-				],
+				layout: [],
+				echartOption: {
+					xAxis: {
+						type: "category",
+						data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+					},
+					yAxis: {
+						type: "value",
+					},
+					series: [
+						{
+							data: [150, 230, 224, 218, 135, 147, 260],
+							type: "line",
+						},
+					],
+				},
+				echartOption2: {
+					color: ["#80FFA5", "#00DDFF", "#37A2FF", "#FF0087", "#FFBF00"],
+					grid: {
+						left: "3%",
+						right: "4%",
+						bottom: "3%",
+						containLabel: true,
+					},
+					xAxis: [
+						{
+							type: "category",
+							boundaryGap: false,
+							data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+						},
+					],
+					yAxis: [
+						{
+							type: "value",
+						},
+					],
+					series: [
+						{
+							name: "Line 1",
+							type: "line",
+							stack: "总量",
+							smooth: true,
+							lineStyle: {
+								width: 0,
+							},
+							showSymbol: false,
+							areaStyle: {
+								opacity: 0.8,
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+									{
+										offset: 0,
+										color: "rgba(128, 255, 165)",
+									},
+									{
+										offset: 1,
+										color: "rgba(1, 191, 236)",
+									},
+								]),
+							},
+							emphasis: {
+								focus: "series",
+							},
+							data: [140, 232, 101, 264, 90, 340, 250],
+						},
+						{
+							name: "Line 2",
+							type: "line",
+							stack: "总量",
+							smooth: true,
+							lineStyle: {
+								width: 0,
+							},
+							showSymbol: false,
+							areaStyle: {
+								opacity: 0.8,
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+									{
+										offset: 0,
+										color: "rgba(0, 221, 255)",
+									},
+									{
+										offset: 1,
+										color: "rgba(77, 119, 255)",
+									},
+								]),
+							},
+							emphasis: {
+								focus: "series",
+							},
+							data: [120, 282, 111, 234, 220, 340, 310],
+						},
+						{
+							name: "Line 3",
+							type: "line",
+							stack: "总量",
+							smooth: true,
+							lineStyle: {
+								width: 0,
+							},
+							showSymbol: false,
+							areaStyle: {
+								opacity: 0.8,
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+									{
+										offset: 0,
+										color: "rgba(55, 162, 255)",
+									},
+									{
+										offset: 1,
+										color: "rgba(116, 21, 219)",
+									},
+								]),
+							},
+							emphasis: {
+								focus: "series",
+							},
+							data: [320, 132, 201, 334, 190, 130, 220],
+						},
+						{
+							name: "Line 4",
+							type: "line",
+							stack: "总量",
+							smooth: true,
+							lineStyle: {
+								width: 0,
+							},
+							showSymbol: false,
+							areaStyle: {
+								opacity: 0.8,
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+									{
+										offset: 0,
+										color: "rgba(255, 0, 135)",
+									},
+									{
+										offset: 1,
+										color: "rgba(135, 0, 157)",
+									},
+								]),
+							},
+							emphasis: {
+								focus: "series",
+							},
+							data: [220, 402, 231, 134, 190, 230, 120],
+						},
+						{
+							name: "Line 5",
+							type: "line",
+							stack: "总量",
+							smooth: true,
+							lineStyle: {
+								width: 0,
+							},
+							showSymbol: false,
+							label: {
+								show: true,
+								position: "top",
+							},
+							areaStyle: {
+								opacity: 0.8,
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+									{
+										offset: 0,
+										color: "rgba(255, 191, 0)",
+									},
+									{
+										offset: 1,
+										color: "rgba(224, 62, 76)",
+									},
+								]),
+							},
+							emphasis: {
+								focus: "series",
+							},
+							data: [220, 302, 181, 234, 210, 290, 150],
+						},
+					],
+				},
+				once: true,
 			};
 		},
 		computed: {
 			allCharts: () => allCharts,
 		},
 		mounted() {
-			// console.log(this.$refs);
-			// for (const key in this.$refs) {
-			// 	if (Object.hasOwnProperty.call(this.$refs, key)) {
-			// 		const chart = this.$refs[key];
-			// 		if (key.includes("chart")) {
-			// 			// console.log(chart[0].$el);
-			// 			chart[0].$el.ondrag = this.drag
-			// 			chart[0].$el.ondragend = this.dragend
-			// 		}
-			// 	}
-			// }
 			document.addEventListener(
 				"dragover",
 				function(e) {
@@ -112,12 +268,8 @@
 			);
 		},
 		methods: {
-			what() {
-				console.log(123123);
-			},
 			drag: function(e) {
-				console.log(e.target);
-				const parentRect = this.$refs.gridlayout.$el.getBoundingClientRect();
+				let parentRect = this.$refs.gridlayout.$el.getBoundingClientRect();
 				let mouseInGrid = false;
 				if (
 					mouseXY.x > parentRect.left &&
@@ -160,8 +312,7 @@
 				}
 			},
 			dragend: function(e, thisChart) {
-				console.log(e.target);
-				const parentRect = this.$refs.gridlayout.$el.getBoundingClientRect();
+				let parentRect = this.$refs.gridlayout.$el.getBoundingClientRect();
 				let mouseInGrid = false;
 				if (
 					mouseXY.x > parentRect.left &&
@@ -174,7 +325,6 @@
 				if (mouseInGrid === true) {
 					this.$refs.gridlayout.dragEvent("dragend", "drop", DragPos.x, DragPos.y, 1, 1);
 					this.layout = this.layout.filter((obj) => obj.i !== "drop");
-
 					this.layout.push({
 						x: DragPos.x,
 						y: DragPos.y,
@@ -186,11 +336,10 @@
 					// try {
 					this.$nextTick(() => {
 						this.$refs.gridlayout.$children[this.layout.length].$refs.item.style.display = "block";
-						// console.log(this.$refs.gridlayout.$children[this.layout.length].$refs.item);
+						console.log(this.$refs.gridlayout.$children[this.layout.length].$refs.item);
 						echarts
 							.init(this.$refs.gridlayout.$children[this.layout.length].$refs.item)
 							.setOption(thisChart);
-						// this.once = !this.once;
 					});
 					// } catch {}
 				}
@@ -200,18 +349,10 @@
 </script>
 
 <style scoped>
-	.page {
-		display: flex;
-	}
-	.droppable-list {
+	.droppable-element {
 		width: 50vw;
-		/* height: 100vh; */
 		text-align: center;
-		/* transition: width 0.4s ease-out; */
-	}
-	.droppable-content {
-		width: 100%;
-		height: 100vh !important;
+		padding: 10px;
 	}
 	.vue-grid-layout {
 		background: #eee;
@@ -281,21 +422,11 @@
 		columns: 120px;
 	}
 
-	.setting {
-		position: fixed;
-
-		font-size: 30px;
-		color: hotpink;
-		margin: 40px 40px;
-	}
-
-	.echarts {
-		order: 1;
-		width: 100%;
-		/* height: 50px; */
-	}
-	.chart-tab {
+	.page {
 		display: flex;
-		flex-direction: column;
+	}
+	.drappable-content {
+		width: 100%;
+		height: 100vh !important;
 	}
 </style>
