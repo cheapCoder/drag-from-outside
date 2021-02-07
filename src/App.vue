@@ -13,15 +13,14 @@
 		>
 			<grid-item
 				style="touch-action: none"
-				:key="index"
 				v-for="(item, index) in layout"
+				:key="index"
 				:x="item.x"
 				:y="item.y"
 				:w="item.w"
 				:h="item.h"
 				:i="item.i"
 			>
-				<!-- <span class="text">{{ item.i }}</span> -->
 			</grid-item>
 		</grid-layout>
 		<a-tabs :default-active-key="2" class="droppable-list" :tabBarStyle="{ 'margin-bottom': 0 }">
@@ -155,7 +154,10 @@
 					this.$refs.gridlayout.dragEvent("dragend", DragPos.i, DragPos.x, DragPos.y, 1, 1);
 					this.$nextTick(() => {
 						// this.$refs.gridlayout.$children[this.layout.length].$refs.item.style.display = "block";
-						// console.log(this.$refs.gridlayout.$children[this.layout.length].$refs.item);
+						const what = this.$refs.gridlayout.$children[
+							this.layout.length
+						].$refs.item.getBoundingClientRect();
+						console.log(what);
 						echarts
 							.init(this.$refs.gridlayout.$children[this.layout.length].$refs.item)
 							.setOption(thisChart);
@@ -166,7 +168,11 @@
 	};
 </script>
 
-<style scoped>
+<style>
+	.vue-grid-item:not(.vue-grid-placeholder) {
+		background: #ccc;
+		border: 1px solid black;
+	}
 	.vue-grid-layout {
 		background: #eee;
 	}

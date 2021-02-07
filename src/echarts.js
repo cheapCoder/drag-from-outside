@@ -9,9 +9,10 @@ export default {
       },
       echartOption: {
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         xAxis: {
@@ -36,9 +37,10 @@ export default {
       },
       echartOption: {
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         xAxis: {
@@ -68,9 +70,10 @@ export default {
           data: ['一', '二', '三', '四', '五', '六', '七', '八', '九']
         },
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         yAxis: {
@@ -107,9 +110,10 @@ export default {
       },
       echartOption: {
         grid: {
-          left: '-14%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 6,
+          right: 30,
           containLabel: true
         },
         xAxis: {
@@ -143,9 +147,10 @@ export default {
       },
       echartOption: {
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         xAxis: {
@@ -169,9 +174,10 @@ export default {
       },
       echartOption: {
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         xAxis: {
@@ -199,9 +205,10 @@ export default {
 
 
         grid: {
-          left: '-14%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 6,
+          right: 30,
           containLabel: true
         },
         xAxis: {
@@ -240,9 +247,10 @@ export default {
           data: ['一', '二', '三', '四', '五', '六', '七', '八', '九']
         },
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         yAxis: {
@@ -280,9 +288,10 @@ export default {
       },
       echartOption: {
         grid: {
-          left: '-14%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 6,
+          right: 30,
           containLabel: true
         },
         xAxis: {
@@ -315,9 +324,10 @@ export default {
       },
       echartOption: {
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         xAxis: {
@@ -349,9 +359,10 @@ export default {
           data: ['一', '二', '三', '四', '五', '六', '七', '八', '九']
         },
         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         yAxis: {
@@ -386,10 +397,11 @@ export default {
         i: 34,
       },
       echartOption: {
-         grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
+        grid: {
+          top: 30,
+          bottom: 0,
+          left: 20,
+          right: 30,
           containLabel: true
         },
         xAxis: {
